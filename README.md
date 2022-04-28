@@ -1,5 +1,5 @@
 **If you don't know qutebrowser, the best keyboard driven webbrowser on this
-planet, [https://www.qutebrowser.org/](check it out)!**
+planet, [check it out](https://www.qutebrowser.org/)!**
 
 # Userscripts for Qutebrowser
 
