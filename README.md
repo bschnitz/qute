@@ -1,3 +1,6 @@
+**If you don't know qutebrowser, the best keyboard driven webbrowser on this
+planet, [https://www.qutebrowser.org/](check it out)!**
+
 # Userscripts for Qutebrowser
 
 A very enthusiastic description for currently one userscript:
