@@ -60,3 +60,15 @@ completely loaded (the qutebrowser help stylesheet is such an example), while
 others work immediatly (I have one for wikipedia, which styles it directly). I
 don't know why. If anyone is able to help me figuring that out, please contact
 me via mail or open a ticket.
+
+### Stylsheet sources
+
+There are some sources for user styles. Remark, that those stylesheets must
+first be adapted to work with this setup. Especially the must not contain any
+information about the urls they apply to directly. Instead this information
+must be transfered to `stylemap.py`.
+
+  - https://uso.kkx.one/
+  - https://userstyles.world/explore
+  - https://freestyler.ws/
+  - https://github.com/topics/usercss
