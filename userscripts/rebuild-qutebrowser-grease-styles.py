@@ -54,14 +54,16 @@ class RebuildGreaseStyles(object):
             + f'GM_addStyle(`{css}`)'
         )
 
-def greasemonkey_reload():
-    fifo = os.getenv('QUTE_FIFO')
-    
-    if not fifo: return
+def reload():
+   fifo = os.getenv('QUTE_FIFO')
+   
+   if not fifo: return
 
-    with open(fifo, 'w') as feefifofam:
-        feefifofam.write('greasemonkey-reload -q\n')
+   with open(fifo, 'w') as feefifofam:
+       feefifofam.write('greasemonkey-reload -q\n')
+       feefifofam.write('reload\n')
+
 
 if __name__ == "__main__":
     RebuildGreaseStyles().create_grease_scripts_from_css_files()
-    greasemonkey_reload()
+    reload()
