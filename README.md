@@ -41,17 +41,17 @@ for which the style shall be applied.
 Now the only thing left to do is to execute the userscript. This can be done
 from within qutebrowser of course
 ```
-spawn --userscript rebuild-qutebrowser-grease-styles.py
+:spawn --userscript rebuild-qutebrowser-grease-styles.py
 ```
 as well as by executing the script directly from a terminal (provided all
 environment variables are set correctly):
-```
+```sh
 python3 rebuild-qutebrowser-grease-styles.py
 ```
 The script will just build a userscript for each stylesheet and place it under
 the greasemonkey directory under the config directory of qutebrowser.
 Of course it may be convenient to add a mapping to your config.py, e.g.:
-```
+```python
 config.bind(',s', 'spawn --userscript rebuild-qutebrowser-grease-styles.py', mode='normal')
 ```
 Note that this perfectly eases the developement flow when developing user
@@ -121,7 +121,7 @@ exactly like you did again for the `disable` command.
 To faciliate the invokation of darkreader it may be useful to define aliases (or
 keybindings if you like) in your `config.py`, e.g.:
 
-```
+```python
 c.aliases['dr'] = 'spawn --userscript darkreader.py enable domain'
 c.aliases['drd'] = 'spawn --userscript darkreader.py disable domain'
 c.aliases['darkreader'] = 'spawn --userscript darkreader.py'
