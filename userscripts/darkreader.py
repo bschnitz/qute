@@ -3,6 +3,7 @@
 import os
 import sys
 import hashlib
+from urllib.parse import urlparse
 
 class Darkreader(object):
     def __init__(self):
@@ -40,6 +41,7 @@ class Darkreader(object):
             + f'// @include       {url_pattern}\n'
             + '// @require       https://cdn.jsdelivr.net/npm/darkreader/darkreader.min.js\n'
             + '// ==/UserScript==\n'
+            + 'DarkReader.setFetchMethod(window.fetch);'
             + 'DarkReader.enable({\n'
             + f'	brightness: {brightness},\n'
             + f'	contrast: {contrast},\n'
@@ -56,13 +58,32 @@ def reload():
        feefifofam.write('greasemonkey-reload -q\n')
        feefifofam.write('reload\n')
 
+def get_domain_pattern():
+    url = os.getenv('QUTE_URL')
+    domain = urlparse(url).netloc
+    return f'*{domain}*'
+
 if __name__ == "__main__":
     darkreader = Darkreader()
-    url_pattern = sys.argv[2]
-    brightness = 90 if len(sys.argv) < 3 else sys.argv[2]
-    contrast = 90 if len(sys.argv) < 4 else sys.argv[3]
-    sepia = 0 if len(sys.argv) < 5 else sys.argv[4]
-    if sys.argv[1] == 'disable':
+
+    sys.argv.pop(0)
+    type = sys.argv.pop(0)
+    url_pattern = sys.argv.pop(0)
+    if url_pattern == 'domain': url_pattern = get_domain_pattern()
+
+    defaults = {
+        'brightness': 90,
+        'contrast':   90,
+        'sepia':      50
+    }
+
+    brightness = sys.argv.pop(0) if sys.argv else defaults['brightness']
+    contrast   = sys.argv.pop(0) if sys.argv else defaults['contrast']
+    sepia      = sys.argv.pop(0) if sys.argv else defaults['sepia']
+
+    if type == 'disable':
         darkreader.disable(url_pattern)
     else:
         darkreader.enable(url_pattern, brightness, contrast, sepia)
+
+    reload()

@@ -3,10 +3,16 @@ planet, [check it out](https://www.qutebrowser.org/)!**
 
 # Userscripts for Qutebrowser
 
-A very enthusiastic description for currently one userscript:
-`rebuild-qutebrowser-grease-styles.py`.
+A very enthusiastic description for currently two userscripts:
 
-## Per Domain Stylesheets for Qutebrowser
+1. [Per Domain Stylesheets](#stylesheets)
+2. [(Per Domain) Darkreader](#darkreader)
+
+For an introduction to userscripts in qutebrowser open
+[qute://help/userscripts.html](qute://help/userscripts.html) from within
+qutebrowser.
+
+## Per Domain Stylesheets for Qutebrowser {#stylesheets}
 
 Currently qutebrowser does not natively support per-domain stylesheets. So to
 trick it to have some kind of per-domain stylesheets, one can use greasmonkey
@@ -75,3 +81,57 @@ must be transfered to `stylemap.py`.
   - https://userstyles.world/explore
   - https://freestyler.ws/
   - https://github.com/topics/usercss
+
+## Per Domain Darkreader for Qutebrowser {#darkreader}
+
+All credits go to the developers of
+[Darkreader](https://github.com/darkreader/darkreader).
+
+### Installation and Usage
+
+To install this userscript, just copy `userscripts/darkreader.py` to the
+`userscripts` directory under the qutebrowser config directory.
+
+Then you can enable darkreader for the current domain using:
+
+```
+:spawn --userscript darkreader.py enable domain
+```
+
+(Yes, domain must be typed literally.)
+
+`brightness`, `contrast` and `sepia` for darkreader default to `90`, `90` and
+`50`, but you can specify different values by appending them to the userscript
+invocation. e.g.:
+
+```
+:spawn --userscript darkreader.py enable domain 100 100 0
+```
+
+Darkreader can be disabled by
+
+```
+:spawn --userscript darkreader.py disable domain
+```
+
+You can also use an url pattern instead of the string `domain`. However to
+disable darkreader for the specified pattern, you must be sure to type it
+exactly like you did again for the `disable` command.
+
+To faciliate the invokation of darkreader it may be useful to define aliases (or
+keybindings if you like) in your `config.py`, e.g.:
+
+```
+c.aliases['dr'] = 'spawn --userscript darkreader.py enable domain'
+c.aliases['drd'] = 'spawn --userscript darkreader.py disable domain'
+c.aliases['darkreader'] = 'spawn --userscript darkreader.py'
+config.bind(',d', "set-cmd-text -s :darkreader enable '{url}*'")
+config.bind(',r', "set-cmd-text -s :darkreader disable '{url}*'")
+```
+
+### How it works
+
+The userscript creates a greasemonkey script for the domain/url pattern
+provided when invoking it. It's named `darkreader-{md5 of the url pattern}` and
+stored in the greasemonkey folder in the qutebrowser configuration directory.
+It just contains an [invokation to DarkReader](https://github.com/darkreader/darkreader#using-dark-reader-for-a-website).
