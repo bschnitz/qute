@@ -118,7 +118,7 @@ You can also use an url pattern instead of the string `domain`. However to
 disable darkreader for the specified pattern, you must be sure to type it
 exactly like you did again for the `disable` command.
 
-To faciliate the invokation of darkreader it may be useful to define aliases (or
+To facilitate the invokation of darkreader it may be useful to define aliases (or
 keybindings if you like) in your `config.py`, e.g.:
 
 ```python
