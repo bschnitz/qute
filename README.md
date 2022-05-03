@@ -5,14 +5,14 @@ planet, [check it out](https://www.qutebrowser.org/)!**
 
 A very enthusiastic description for currently two userscripts:
 
-1. [Per Domain Stylesheets](#stylesheets)
-2. [(Per Domain) Darkreader](#darkreader)
+1. [Per Domain Stylesheets](#per-domain-stylesheets-for-qutebrowser)
+2. [(Per Domain) Darkreader](#per-domain-darkreader-for-qutebrowser)
 
 For an introduction to userscripts in qutebrowser open
 [qute://help/userscripts.html](qute://help/userscripts.html) from within
 qutebrowser.
 
-## Per Domain Stylesheets for Qutebrowser {#stylesheets}
+## Per Domain Stylesheets for Qutebrowser
 
 Currently qutebrowser does not natively support per-domain stylesheets. So to
 trick it to have some kind of per-domain stylesheets, one can use greasmonkey
@@ -82,7 +82,7 @@ must be transfered to `stylemap.py`.
   - https://freestyler.ws/
   - https://github.com/topics/usercss
 
-## Per Domain Darkreader for Qutebrowser {#darkreader}
+## Per Domain Darkreader for Qutebrowser
 
 All credits go to the developers of
 [Darkreader](https://github.com/darkreader/darkreader).
