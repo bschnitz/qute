@@ -24,15 +24,15 @@ class Darkreader(object):
         grease_filename = f'darkreader-{url_pattern_md5.hexdigest()}.js'
         return f'{self.config_dir}/greasemonkey/{grease_filename}'
 
-    def enable(self, url_pattern, brightness, contrast, sepia):
-        script = self.create_grease(url_pattern, brightness, contrast, sepia)
+    def enable(self, url, url_pattern, brightness, contrast, sepia):
+        script = self.create_grease(url, url_pattern, brightness, contrast, sepia)
         with open(self.get_scriptpath(url_pattern), 'w') as grease_file:
             grease_file.write(script)
 
     def disable(self, url_pattern):
         os.remove(self.get_scriptpath(url_pattern))
 
-    def create_grease(self, url_pattern, brightness, contrast, sepia):
+    def create_grease(self, url, url_pattern, brightness, contrast, sepia):
         return (
               '// ==UserScript==\n'
             + f'// @name          Dark Reader ({url_pattern})\n'
@@ -41,6 +41,7 @@ class Darkreader(object):
             + f'// @include       {url_pattern}\n'
             + '// @require       https://cdn.jsdelivr.net/npm/darkreader/darkreader.min.js\n'
             + '// ==/UserScript==\n'
+            + f'// original url: {url}\n'
             + 'DarkReader.setFetchMethod(window.fetch);'
             + 'DarkReader.enable({\n'
             + f'	brightness: {brightness},\n'
@@ -68,6 +69,7 @@ if __name__ == "__main__":
 
     sys.argv.pop(0)
     type = sys.argv.pop(0)
+    url = os.getenv('QUTE_URL')
     url_pattern = sys.argv.pop(0)
     if url_pattern == 'domain': url_pattern = get_domain_pattern()
 
@@ -84,6 +86,6 @@ if __name__ == "__main__":
     if type == 'disable':
         darkreader.disable(url_pattern)
     else:
-        darkreader.enable(url_pattern, brightness, contrast, sepia)
+        darkreader.enable(url, url_pattern, brightness, contrast, sepia)
 
     reload()
