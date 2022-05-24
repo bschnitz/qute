@@ -59,10 +59,10 @@ def reload():
        feefifofam.write('greasemonkey-reload -q\n')
        feefifofam.write('reload\n')
 
-def get_domain_pattern():
+def get_url_pattern():
     url = os.getenv('QUTE_URL')
-    domain = urlparse(url).netloc
-    return f'*{domain}*'
+    parsed = urlparse(url)
+    return f'{parsed.scheme}://{parsed.netloc}*'
 
 if __name__ == "__main__":
     darkreader = Darkreader()
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     type = sys.argv.pop(0)
     url = os.getenv('QUTE_URL')
     url_pattern = sys.argv.pop(0)
-    if url_pattern == 'domain': url_pattern = get_domain_pattern()
+    if url_pattern == 'domain': url_pattern = get_url_pattern()
 
     defaults = {
         'brightness': 90,
